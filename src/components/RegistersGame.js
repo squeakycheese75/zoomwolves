@@ -11,7 +11,8 @@ class RegisterGame extends React.Component {
   }
 
   handleRegister() {
-    fetch("http://localhost:5000/api/client")
+    const baseurl = process.env.REACT_APP_API_URL + "/api/client";
+    fetch(baseurl)
       // We get the API response and receive data in JSON format...
       .then((response) => response.json())
       .then(

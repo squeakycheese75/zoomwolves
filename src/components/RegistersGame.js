@@ -5,14 +5,18 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 class RegisterGame extends React.Component {
   constructor(props) {
     super(props);
-    // Don't call this.setState() here!
     this.state = { isRegistered: false, id: "" };
     this.handleRegister = this.handleRegister.bind(this);
   }
 
   handleRegister() {
-    const baseurl = process.env.REACT_APP_API_URL + "/api/client";
-    fetch(baseurl)
+    const baseurl = process.env.REACT_APP_API_URL + "/api/clients";
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "Bobby Xerox" }),
+    };
+    fetch(baseurl, requestOptions)
       // We get the API response and receive data in JSON format...
       .then((response) => response.json())
       .then(
@@ -26,6 +30,24 @@ class RegisterGame extends React.Component {
     // Catch any errors we hit and update the app
     // .catch((error) ));
   }
+
+  // handlePlayer() {
+  //   const baseurl = process.env.REACT_APP_API_URL + "/api/players";
+  //   fetch(baseurl)
+  //     // We get the API response and receive data in JSON format...
+  //     .then((response) => response.json())
+  //     .then(
+  //       (data) =>
+  //         this.setState({
+  //           id: data.id,
+  //           isRegistered: true,
+  //         })
+  //       // console.log(data.id)
+  //     );
+  //   // Catch any errors we hit and update the app
+  //   // .catch((error) ));
+  // }
+
   render() {
     return (
       <>
@@ -37,7 +59,6 @@ class RegisterGame extends React.Component {
               <td>
                 <a href={"http://localhost:3000/players/" + this.state.id}>
                   http://localhost:5000/api/game+{this.state.id}
-                  {/* history.push(`/product/${row.ticker}`); */}
                 </a>
               </td>
               <CopyToClipboard

@@ -10,7 +10,7 @@ class RegisterGame extends React.Component {
   }
 
   handleRegister() {
-    const baseurl = process.env.REACT_APP_API_URL + "/api/clients";
+    const baseurl = process.env.REACT_APP_API_URL + "/api/games";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

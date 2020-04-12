@@ -19,45 +19,31 @@ class RegisterGame extends React.Component {
     fetch(baseurl, requestOptions)
       // We get the API response and receive data in JSON format...
       .then((response) => response.json())
-      .then(
-        (data) =>
-          this.setState({
-            id: data.id,
-            isRegistered: true,
-          })
-        // console.log(data.id)
-      );
-    // Catch any errors we hit and update the app
-    // .catch((error) ));
+      .then((data) =>
+        this.setState({
+          id: data.id,
+          isRegistered: true,
+        })
+      )
+      .catch((error) => console.log(error));
   }
-
-  // handlePlayer() {
-  //   const baseurl = process.env.REACT_APP_API_URL + "/api/players";
-  //   fetch(baseurl)
-  //     // We get the API response and receive data in JSON format...
-  //     .then((response) => response.json())
-  //     .then(
-  //       (data) =>
-  //         this.setState({
-  //           id: data.id,
-  //           isRegistered: true,
-  //         })
-  //       // console.log(data.id)
-  //     );
-  //   // Catch any errors we hit and update the app
-  //   // .catch((error) ));
-  // }
 
   render() {
     return (
-      <>
+      <div>
         <header className="App-header">
           {this.state.isRegistered ? (
-            <>
-              <p>You're now registered</p>
+            <div>
+              <p>You're now registered!</p>
+              <br />
               <p>Send this link to your players:</p>
+              <br />
               <td>
-                <a href={"http://localhost:3000/players/" + this.state.id}>
+                <a
+                  href={"http://localhost:3000/players/" + this.state.id}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   http://localhost:5000/api/game+{this.state.id}
                 </a>
               </td>
@@ -65,19 +51,19 @@ class RegisterGame extends React.Component {
                 text={"http://localhost:3000/players/" + this.state.id}
                 onCopy={() => this.setState({ copied: true })}
               >
-                <Button variant="primary">Copy to clipboard with button</Button>
+                <Button variant="primary">Copy to clipboard.</Button>
               </CopyToClipboard>
-            </>
+            </div>
           ) : (
-            <>
+            <div>
               <h1>Register a new game? </h1>
               <Button variant="primary" onClick={this.handleRegister}>
-                Click
+                Create
               </Button>
-            </>
+            </div>
           )}
         </header>
-      </>
+      </div>
     );
   }
 }

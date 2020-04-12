@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-import RegisterGame from "./components/RegistersGame";
-import Players from "./components/Players";
+import RegisterGame from "./components/Game/RegistersGame";
+import Players from "./components/Players/Players";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -18,7 +18,6 @@ function App() {
             </>
           )}
         />
-        {/* <Route path="/players/:id" render={() => <Players />} /> */}
         <Route
           exact
           path="/players/:gameid"

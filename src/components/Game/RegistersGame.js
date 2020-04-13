@@ -42,7 +42,7 @@ class RegisterGame extends React.Component {
     const response = await fetch(baseurl);
     const json = await response.json();
     console.log(json);
-    this.setState({ players: json });
+    this.setState({ players: json.players });
   }
 
   montiorPlayers() {
@@ -82,6 +82,15 @@ class RegisterGame extends React.Component {
               >
                 <Button variant="primary">Copy to clipboard.</Button>
               </CopyToClipboard>
+              <ol>
+                <h2>
+                  There are currently {this.state.players.length} players
+                  registered!
+                </h2>
+                {this.state.players.map((player) => (
+                  <li>{player.name}</li>
+                ))}
+              </ol>
             </div>
           ) : (
             <div>
@@ -91,12 +100,6 @@ class RegisterGame extends React.Component {
               </Button>
             </div>
           )}
-
-          <ol>
-            {this.state.players.map((player) => (
-              <li>{player.name}</li>
-            ))}
-          </ol>
         </header>
       </div>
     );

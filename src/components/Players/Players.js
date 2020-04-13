@@ -15,14 +15,6 @@ class Players extends React.Component {
     };
   }
 
-  // async componentDidMount() {
-  //   const baseurl =
-  //     process.env.REACT_APP_API_URL + "/api/characters/" + this.state.id;
-  //   const response = await fetch(baseurl);
-  //   const json = await response.json();
-  //   this.setState({ data: json, loaded: true });
-  // }
-
   async loadCharacters() {
     console.log("loadCharacters function has been executed");
     const baseurl =
@@ -77,11 +69,11 @@ class Players extends React.Component {
               <h3>
                 You've been cast as a <b>{this.state.data.role}</b>!
               </h3>
-              <p>Your job is to...{this.state.data.desc}</p>
+              <p>Your role is to...{this.state.data.desc}</p>
             </>
           ) : (
             <>
-              <h3>Waiting for charatcter casting....</h3>
+              <h3>Waiting for character casting....</h3>
             </>
           )}
         </header>

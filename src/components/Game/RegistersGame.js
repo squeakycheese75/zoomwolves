@@ -5,8 +5,9 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 class RegisterGame extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isRegistered: false, id: "", players: [] };
+    this.state = { isRegistered: false, id: "", players: [], isCast: false };
     this.handleRegister = this.handleRegister.bind(this);
+    this.handleCast = this.handleCast.bind(this);
   }
 
   handleRegister() {
@@ -30,6 +31,28 @@ class RegisterGame extends React.Component {
             this.montiorPlayers();
           }
         )
+      )
+      .catch((error) => console.log(error));
+  }
+
+  handleCast() {
+    console.log(this.state);
+    console.log("In handleCast");
+    const baseurl =
+      process.env.REACT_APP_API_URL + "/api/games/" + this.state.id + "/close";
+    console.log(baseurl);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify({ name: "Bobby Xerox" }),
+    };
+    fetch(baseurl, requestOptions)
+      // We get the API response and receive data in JSON format...
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({
+          isCast: true,
+        })
       )
       .catch((error) => console.log(error));
   }
@@ -88,8 +111,13 @@ class RegisterGame extends React.Component {
                   registered!
                 </h2>
                 {this.state.players.map((player) => (
-                  <li>{player.name}</li>
+                  <li>
+                    {player.name} is a {player.role}
+                  </li>
                 ))}
+                <Button variant="primary" onClick={this.handleCast}>
+                  Close and cast
+                </Button>
               </ol>
             </div>
           ) : (

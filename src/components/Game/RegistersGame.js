@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+// const fetch = require("node-fetch");
 
 class RegisterGame extends React.Component {
   constructor(props) {
@@ -10,15 +11,14 @@ class RegisterGame extends React.Component {
     this.handleCast = this.handleCast.bind(this);
   }
 
-  handleRegister() {
+  async handleRegister() {
     const baseurl = process.env.REACT_APP_API_URL + "/api/games";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: "Bobby Xerox" }),
     };
-    fetch(baseurl, requestOptions)
-      // We get the API response and receive data in JSON format...
+    await fetch(baseurl, requestOptions)
       .then((response) => response.json())
       .then((data) =>
         this.setState(
@@ -35,23 +35,20 @@ class RegisterGame extends React.Component {
       .catch((error) => console.log(error));
   }
 
-  handleCast() {
-    console.log(this.state);
-    console.log("In handleCast");
+  async handleCast() {
     const baseurl =
       process.env.REACT_APP_API_URL + "/api/games/" + this.state.id + "/close";
-    console.log(baseurl);
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify({ name: "Bobby Xerox" }),
     };
-    fetch(baseurl, requestOptions)
-      // We get the API response and receive data in JSON format...
+    await fetch(baseurl, requestOptions)
       .then((response) => response.json())
       .then((data) =>
         this.setState({
           isCast: true,
+          players: data.players
         })
       )
       .catch((error) => console.log(error));
@@ -121,13 +118,13 @@ class RegisterGame extends React.Component {
               </ol>
             </div>
           ) : (
-            <div>
-              <h1>Register a new game? </h1>
-              <Button variant="primary" onClick={this.handleRegister}>
-                Create
+              <div>
+                <h1>Register a new game? </h1>
+                <Button variant="primary" onClick={this.handleRegister}>
+                  Create
               </Button>
-            </div>
-          )}
+              </div>
+            )}
         </header>
       </div>
     );

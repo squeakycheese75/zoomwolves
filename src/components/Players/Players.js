@@ -9,7 +9,7 @@ class Players extends React.Component {
     this.state = {
       gameid: props.match.params.gameid,
       playerid: "",
-      character: { role: "waiting", desc: "......" },
+      character: { role: "waiting", desc: '' },
       isCast: false,
       isEnrolled: false,
     };
@@ -18,17 +18,27 @@ class Players extends React.Component {
   async loadCharacters() {
     console.log("loadCharacters function has been executed");
     const baseurl =
-      process.env.REACT_APP_API_URL + "/api/characters/" + this.state.gameid + "/" + this.state.playerid;
+      process.env.REACT_APP_API_URL + "/api/characters/" + this.state.gameid + "/player/" + this.state.playerid;
+
     console.log("loadCharacters function has been executed-", baseurl);
-    const response = await fetch(baseurl);
-    const json = await response.json();
-    console.log("back from characterswith ", json);
-    this.setState({ character: json, isCast: true });
+    fetch(baseurl)
+      // We get the API response and receive data in JSON format...
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState(
+          {
+            character: data,
+            isCast: true,
+          }
+        )
+      )
+      .catch((error) => console.log(error));
   }
 
   registerPlayer = (name) => {
     const baseurl =
       process.env.REACT_APP_API_URL + "/api/players/" + this.state.gameid;
+
     console.log(baseurl);
     const requestOptions = {
       method: "POST",
@@ -50,7 +60,6 @@ class Players extends React.Component {
           }
         )
       )
-      // .then(() => this.loadCharacters())
       .catch((error) => console.log(error));
   };
 
@@ -69,9 +78,9 @@ class Players extends React.Component {
           {this.state.isCast ? (
             <>
               <h3>
-                You've been cast as a <b>{this.state.data.role}</b>!
+                You've been cast as a <b>{this.state.character.role}</b>!
               </h3>
-              <p>Your role is to...{this.state.data.desc}</p>
+              <p>Your role is to...{this.state.character.desc}</p>
             </>
           ) : (
               <>

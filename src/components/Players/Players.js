@@ -18,9 +18,11 @@ class Players extends React.Component {
   async loadCharacters() {
     console.log("loadCharacters function has been executed");
     const baseurl =
-      process.env.REACT_APP_API_URL + "/api/characters/" + this.state.gameid;
+      process.env.REACT_APP_API_URL + "/api/characters/" + this.state.gameid + "/" + this.state.playerid;
+    console.log("loadCharacters function has been executed-", baseurl);
     const response = await fetch(baseurl);
     const json = await response.json();
+    console.log("back from characterswith ", json);
     this.setState({ character: json, isCast: true });
   }
 
@@ -43,7 +45,7 @@ class Players extends React.Component {
             isEnrolled: true,
           },
           () => {
-            console.log("back from setState");
+            console.log("back from setState with playerid. ", data.id);
             this.loadCharacters();
           }
         )
@@ -72,10 +74,10 @@ class Players extends React.Component {
               <p>Your role is to...{this.state.data.desc}</p>
             </>
           ) : (
-            <>
-              <h3>Waiting for character casting....</h3>
-            </>
-          )}
+              <>
+                <h3>Waiting for character casting....</h3>
+              </>
+            )}
         </header>
       </>
     );

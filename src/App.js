@@ -7,8 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <Switch>
-      <div className="App">
+    <div className="App">
+      <Switch>
         <Route
           exact
           path="/"
@@ -23,8 +23,8 @@ function App() {
           path="/players/:gameid"
           component={(props) => <Players gameid={props.match.params.gameid} />}
         />
-      </div>
-    </Switch>
+      </Switch>
+    </div>
   );
 }
 

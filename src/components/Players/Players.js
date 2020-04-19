@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import NameForm from "../common/NameForm";
 import GameDetails from "./GameDetails";
+import Cast from './components/Cast';
 
 class Players extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class Players extends React.Component {
             isEnrolled: true,
           },
           () => {
-            console.log("back from setState with playerid. ", data.id);
+            // console.log("back from setState with playerid. ", data.id);
             this.loadCharacters();
           }
         )
@@ -65,23 +66,21 @@ class Players extends React.Component {
 
   render() {
     const { match } = this.props;
-    const id = match.params.gameid;
+    const { gameid } = match.params;
 
     return (
       <>
         <header className="App-header">
-          <GameDetails id={id} />
+          <GameDetails id={gameid} />
+
           {!this.state.isEnrolled && (
             <NameForm registerPlayer={this.registerPlayer} />
           )}
 
+          <p>Game registered to {gameid}</p>
+
           {this.state.isCast ? (
-            <>
-              <h3>
-                You've been cast as a <b>{this.state.character.role}</b>!
-              </h3>
-              <p>Your role is to...{this.state.character.desc}</p>
-            </>
+            <Cast character={this.state.character} />
           ) : (
               <>
                 <h3>Waiting for character casting....</h3>

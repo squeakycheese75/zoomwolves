@@ -11,7 +11,7 @@ class RegisterGame extends React.Component {
       players: [],
       isCast: false,
       _isMounted: false,
-      backgroundColor: "#ff33cc",
+      backgroundColor: "#212529",
     };
     this.handleRegister = this.handleRegister.bind(this);
     this.handleCast = this.handleCast.bind(this);
@@ -40,10 +40,11 @@ class RegisterGame extends React.Component {
           {
             id: data.id,
             isRegistered: true,
+            backgroundColor: data.colour,
           },
           () => {
             console.log("setting data back");
-            this.montiorPlayers();
+            this.monitorPlayers();
           }
         )
       )
@@ -53,7 +54,7 @@ class RegisterGame extends React.Component {
   async handleCast() {
     const baseurl =
       process.env.REACT_APP_API_URL + "/api/games/" + this.state.id + "/close";
-
+    console.log(baseurl);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -73,14 +74,22 @@ class RegisterGame extends React.Component {
     // console.log("loadCharacters function has been executed");
     const baseurl =
       process.env.REACT_APP_API_URL + "/api/games/" + this.state.id;
-    // console.log(baseurl);
-    const response = await fetch(baseurl);
-    const json = await response.json();
-    console.log("back from loadCharacters");
-    this.setState({ players: json.players });
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    console.log(baseurl);
+    await fetch(baseurl, requestOptions)
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({
+          players: data.players,
+        })
+      )
+      .catch((error) => console.log(error));
   }
 
-  montiorPlayers() {
+  monitorPlayers() {
     if (this.state.isRegistered) {
       this.loadCharacters();
     }

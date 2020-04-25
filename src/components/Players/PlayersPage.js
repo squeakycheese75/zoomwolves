@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import NameForm from "../common/NameForm";
 import GameDetails from "./GameDetails";
-import Cast from './components/Cast';
+import Cast from "./components/Cast";
 
 class Players extends React.Component {
   constructor(props) {
@@ -10,37 +10,62 @@ class Players extends React.Component {
     this.state = {
       gameid: props.match.params.gameid,
       playerid: "",
-      character: { role: "waiting", desc: '' },
+      character: { role: "waiting", desc: "" },
       isCast: false,
       isEnrolled: false,
+      _isMounted: false,
+      name: "",
     };
   }
 
-  async loadCharacters() {
-    console.log("loadCharacters function has been executed");
-    const baseurl =
-      process.env.REACT_APP_API_URL + "/api/characters/" + this.state.gameid + "/player/" + this.state.playerid;
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
-    console.log("loadCharacters function has been executed-", baseurl);
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  async loadCharacters() {
+    const baseurl =
+      process.env.REACT_APP_API_URL +
+      "/api/characters/" +
+      this.state.gameid +
+      "/player/" +
+      this.state.playerid;
+
     fetch(baseurl)
       // We get the API response and receive data in JSON format...
       .then((response) => response.json())
       .then((data) =>
-        this.setState(
-          {
-            character: data,
-            isCast: true,
-          }
-        )
+        this.setState({
+          character: data.character,
+          isCast: data.isCast,
+        })
       )
       .catch((error) => console.log(error));
+  }
+
+  monitorCasting() {
+    if (this.state._isMounted) {
+      this.loadCharacters();
+    }
+    // Refesh until cast
+    var refreshRate = 5 * 1000;
+    setInterval(() => {
+      if (this._isMounted) {
+        // if (!this.state.isCast) {
+        this.loadCharacters();
+        // }
+      }
+    }, refreshRate);
   }
 
   registerPlayer = (name) => {
     const baseurl =
       process.env.REACT_APP_API_URL + "/api/players/" + this.state.gameid;
 
-    console.log(baseurl);
+    // console.log(baseurl);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -54,10 +79,10 @@ class Players extends React.Component {
           {
             playerid: data.id,
             isEnrolled: true,
+            name,
           },
           () => {
-            // console.log("back from setState with playerid. ", data.id);
-            this.loadCharacters();
+            this.monitorCasting();
           }
         )
       )
@@ -71,21 +96,17 @@ class Players extends React.Component {
     return (
       <>
         <header className="App-header">
-          <GameDetails id={gameid} />
+          <GameDetails id={gameid} name={this.state.name} />
 
-          {!this.state.isEnrolled && (
+          {!this.state.isEnrolled ? (
             <NameForm registerPlayer={this.registerPlayer} />
+          ) : (
+            <>
+              <h3>Waiting for the moderator to cast the characters.</h3>
+            </>
           )}
 
-          <p>Game registered to {gameid}</p>
-
-          {this.state.isCast ? (
-            <Cast character={this.state.character} />
-          ) : (
-              <>
-                <h3>Waiting for character casting....</h3>
-              </>
-            )}
+          {this.state.isCast && <Cast character={this.state.character} />}
         </header>
       </>
     );

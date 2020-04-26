@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import Registered from "./Components/Registered";
+import Rules from "./Components/Rules";
 
 class RegisterGame extends React.Component {
   constructor(props) {
@@ -115,6 +116,11 @@ class RegisterGame extends React.Component {
               <Button variant="primary" onClick={this.handleCast}>
                 Close and cast
               </Button>
+              {this.state.isCast && (
+                <>
+                  <Rules />
+                </>
+              )}
             </div>
           ) : (
             <div>

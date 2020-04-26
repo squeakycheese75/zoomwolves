@@ -1,8 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import NameForm from "../common/NameForm";
+import NameForm from "./components/NameForm";
 import GameDetails from "./GameDetails";
 import Cast from "./components/Cast";
+import { Jumbotron, Container } from "reactstrap";
 
 class Players extends React.Component {
   constructor(props) {
@@ -72,7 +73,6 @@ class Players extends React.Component {
       body: JSON.stringify({ name }),
     };
     fetch(baseurl, requestOptions)
-      // We get the API response and receive data in JSON format...
       .then((response) => response.json())
       .then((data) =>
         this.setState(
@@ -95,19 +95,41 @@ class Players extends React.Component {
 
     return (
       <>
-        <header className="App-header">
-          <GameDetails id={gameid} name={this.state.name} />
+        <div>
+          <Jumbotron fluid>
+            <Container fluid>
+              <GameDetails id={gameid} name={this.state.name} />
 
-          {!this.state.isEnrolled ? (
-            <NameForm registerPlayer={this.registerPlayer} />
-          ) : (
-            <>
-              <h3>Waiting for the moderator to cast the characters.</h3>
-            </>
-          )}
+              <br />
+              <p className="lead">
+                A game of social engineering. Please enter your name to join the
+                party and then wait for your character to be cast.
+              </p>
 
-          {this.state.isCast && <Cast character={this.state.character} />}
-        </header>
+              <p>
+                <b>Secrecy is important!</b> Don't tell anyone your character.
+                Or you may end up as dinner.
+              </p>
+              <br />
+              <hr className="my-2" />
+              <br />
+              {!this.state.isEnrolled && (
+                <NameForm registerPlayer={this.registerPlayer} />
+              )}
+              <br />
+              {this.state.isCast ? (
+                <Cast character={this.state.character} />
+              ) : (
+                this.state.isEnrolled && (
+                  <>
+                    <h3>Waiting for the moderator to cast the characters.</h3>
+                  </>
+                )
+              )}
+            </Container>
+          </Jumbotron>
+        </div>
+        {/* </header> */}
       </>
     );
   }

@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import NameForm from "./components/NameForm";
 import GameDetails from "./GameDetails";
 import Cast from "./components/Cast";
-import { Jumbotron, Container } from "reactstrap";
+import { Jumbotron } from "react-bootstrap";
 
 class Players extends React.Component {
   constructor(props) {
@@ -94,43 +94,26 @@ class Players extends React.Component {
     const { gameid } = match.params;
 
     return (
-      <>
-        <div>
-          <Jumbotron fluid>
-            <Container fluid>
-              <GameDetails id={gameid} name={this.state.name} />
-
-              <br />
-              <p className="lead">
-                A game of social engineering. Please enter your name to join the
-                party and then wait for your character to be cast.
-              </p>
-
-              <p>
-                <b>Secrecy is important!</b> Don't tell anyone your character.
-                Or you may end up as dinner.
-              </p>
-              <br />
-              <hr className="my-2" />
-              <br />
-              {!this.state.isEnrolled && (
-                <NameForm registerPlayer={this.registerPlayer} />
-              )}
-              <br />
-              {this.state.isCast ? (
-                <Cast character={this.state.character} />
-              ) : (
-                this.state.isEnrolled && (
-                  <>
-                    <h3>Waiting for the moderator to cast the characters.</h3>
-                  </>
-                )
-              )}
-            </Container>
-          </Jumbotron>
-        </div>
-        {/* </header> */}
-      </>
+      <div className="container">
+        <Jumbotron>
+          <GameDetails id={gameid} name={this.state.name} />
+          {!this.state.isEnrolled && (
+            <>
+              <NameForm registerPlayer={this.registerPlayer} />
+            </>
+          )}
+          <br />
+          {this.state.isCast ? (
+            <Cast character={this.state.character} />
+          ) : (
+            this.state.isEnrolled && (
+              <>
+                <h3>Waiting for the moderator to cast the characters.</h3>
+              </>
+            )
+          )}
+        </Jumbotron>
+      </div>
     );
   }
 }

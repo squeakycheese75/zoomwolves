@@ -1,8 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import NameForm from "../common/NameForm";
+import NameForm from "./components/NameForm";
 import GameDetails from "./GameDetails";
 import Cast from "./components/Cast";
+import { Jumbotron } from "react-bootstrap";
 
 class Players extends React.Component {
   constructor(props) {
@@ -72,7 +73,6 @@ class Players extends React.Component {
       body: JSON.stringify({ name }),
     };
     fetch(baseurl, requestOptions)
-      // We get the API response and receive data in JSON format...
       .then((response) => response.json())
       .then((data) =>
         this.setState(
@@ -94,21 +94,26 @@ class Players extends React.Component {
     const { gameid } = match.params;
 
     return (
-      <>
-        <header className="App-header">
+      <div className="container">
+        <Jumbotron>
           <GameDetails id={gameid} name={this.state.name} />
-
-          {!this.state.isEnrolled ? (
-            <NameForm registerPlayer={this.registerPlayer} />
-          ) : (
+          {!this.state.isEnrolled && (
             <>
-              <h3>Waiting for the moderator to cast the characters.</h3>
+              <NameForm registerPlayer={this.registerPlayer} />
             </>
           )}
-
-          {this.state.isCast && <Cast character={this.state.character} />}
-        </header>
-      </>
+          <br />
+          {this.state.isCast ? (
+            <Cast character={this.state.character} />
+          ) : (
+            this.state.isEnrolled && (
+              <>
+                <h3>Waiting for the moderator to cast the characters.</h3>
+              </>
+            )
+          )}
+        </Jumbotron>
+      </div>
     );
   }
 }

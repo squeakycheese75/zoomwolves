@@ -1,6 +1,7 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Jumbotron } from "react-bootstrap";
 import Registered from "./Components/Registered";
+import Rules from "./Components/Rules";
 
 class RegisterGame extends React.Component {
   constructor(props) {
@@ -71,14 +72,12 @@ class RegisterGame extends React.Component {
   }
 
   async loadCharacters() {
-    // console.log("loadCharacters function has been executed");
     const baseurl =
       process.env.REACT_APP_API_URL + "/api/games/" + this.state.id;
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    console.log(baseurl);
     await fetch(baseurl, requestOptions)
       .then((response) => response.json())
       .then((data) =>
@@ -103,11 +102,8 @@ class RegisterGame extends React.Component {
 
   render() {
     return (
-      <div>
-        <header
-          className="App-header"
-          // style={{ backgroundColor: this.state.backgroundColor }}
-        >
+      <div className="container">
+        <Jumbotron>
           {this.state.isRegistered ? (
             <div>
               <Registered id={this.state.id} players={this.state.players} />
@@ -124,7 +120,8 @@ class RegisterGame extends React.Component {
               </Button>
             </div>
           )}
-        </header>
+        </Jumbotron>
+        {this.state.isCast && <Rules />}
       </div>
     );
   }

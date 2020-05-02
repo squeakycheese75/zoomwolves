@@ -1,14 +1,15 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import Welcome from "./common/Welcome";
 
 export function Home(props) {
   return (
-    <div>
-      <h1>Register a new game? </h1>
-      <Button variant="primary" onClick={this.handleRegister}>
-        Create
-      </Button>
-    </div>
+    // <div className="container">
+    //   <Jumbotron>
+    //     <Welcome />
+    //     <GameDetails />
+    //     <Register handleRegister={this.handleRegister} />
+    //   </Jumbotron>
+    // </div>
   );
 }
 export default Home;

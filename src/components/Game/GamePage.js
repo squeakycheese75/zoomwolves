@@ -1,7 +1,10 @@
 import React from "react";
 import { Button, Jumbotron } from "react-bootstrap";
 import Registered from "./Components/Registered";
-import Rules from "./Components/Rules";
+import Rules from "../common/Rules";
+import GameDetails from "../common/GameDetails";
+import Welcome from "../common/Welcome";
+import Register from "./Components/Register";
 
 class RegisterGame extends React.Component {
   constructor(props) {
@@ -107,17 +110,17 @@ class RegisterGame extends React.Component {
           {this.state.isRegistered ? (
             <div>
               <Registered id={this.state.id} players={this.state.players} />
-
+              <br />
               <Button variant="primary" onClick={this.handleCast}>
                 Close and cast
               </Button>
             </div>
           ) : (
             <div>
-              <h1>Register a new game? </h1>
-              <Button variant="primary" onClick={this.handleRegister}>
-                Create
-              </Button>
+              <Welcome />
+              <GameDetails />
+              <Register handleRegister={this.handleRegister} />
+              <Rules />
             </div>
           )}
         </Jumbotron>

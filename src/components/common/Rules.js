@@ -3,43 +3,13 @@ import React from "react";
 export function Cast(props) {
   return (
     <div>
+      <hr className="my-2" />
       <article class="markdown-body" align="left">
         <header>
           <h1 className="docTitle_1vWb">How to play the game.</h1>
         </header>
         <div className="markdown">
-          <p>
-            Zoomwolves is a social engineering game, it's very important to
-            follow the rules, expecially online! It's also important that
-            players don't look at their screens during the night time event
-            unless instructed to by the moderator!
-          </p>
-          <p>
-            This website helps you to setup a game, distribute the game joining
-            link to the players and to run the random player casting.
-          </p>
-          <p>
-            It's designed to run alongside a conferencing tool like{" "}
-            <a
-              href="https://zoom.us/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Zoom
-            </a>{" "}
-            or{" "}
-            <a
-              href="https://jitsi.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Jitsi
-            </a>
-            .
-          </p>
-
-          <p>Players: 6 to 15</p>
-          <h2>The Aim and Winning</h2>
+          <h3>The Aim and Winning</h3>
           <p>There are 2 teams:</p>
           <ul>
             <li>
@@ -51,7 +21,7 @@ export function Cast(props) {
           </ul>
           <p>
             The werewolves win the game if they kill all the villagers and the
-            villagers win if they kill the werewolves. Simple.
+            villagers win if they kill the werewolves. Simple!
           </p>
           <h1>The Game</h1>
           <p>
@@ -59,7 +29,7 @@ export function Cast(props) {
             both killed or there are only werewolves are left.
           </p>
           <hr className="my-2" />
-          <h2>The Night time</h2>
+          <h3>Nighttime</h3>
           <h4>When the Werewolves hunt!</h4>
           <p>
             Instruct everyone to look down during the night times events and
@@ -138,7 +108,7 @@ export function Cast(props) {
             </li>
           </ul>
           <br />
-          <h2 align="left">The Day time</h2>
+          <h3 align="left">The Daytime</h3>
           <ul>
             <li>
               <p align="left">
@@ -180,6 +150,8 @@ export function Cast(props) {
             all dead or the werewolves kill all the villagers..
           </p>
           <h5>Good Luck</h5>
+
+          <a href="mailto:james_wooltorton@hotmail.com">SqueakyCheese</a>
         </div>
       </article>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import NameForm from "./components/NameForm";
-import GameDetails from "./GameDetails";
+import Welcome from "../common/Welcome";
 import Cast from "./components/Cast";
 import { Jumbotron } from "react-bootstrap";
 
@@ -90,13 +90,15 @@ class Players extends React.Component {
   };
 
   render() {
-    const { match } = this.props;
-    const { gameid } = match.params;
+    // const { match } = this.props;
+    // const { gameid } = match.params;
 
     return (
       <div className="container">
         <Jumbotron>
-          <GameDetails id={gameid} name={this.state.name} />
+          {/* <GameDetails id={gameid} name={this.state.name} /> */}
+          <Welcome />
+
           {!this.state.isEnrolled && (
             <>
               <NameForm registerPlayer={this.registerPlayer} />

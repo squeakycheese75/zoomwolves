@@ -9,6 +9,7 @@ class Players extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // eslint-disable-next-line react/prop-types
       gameid: props.match.params.gameid,
       playerid: "",
       character: { role: "waiting", desc: "" },
@@ -29,6 +30,7 @@ class Players extends React.Component {
 
   async loadCharacters() {
     const baseurl =
+      // eslint-disable-next-line no-undef
       process.env.REACT_APP_API_URL +
       "/api/characters/" +
       this.state.gameid +
@@ -62,11 +64,11 @@ class Players extends React.Component {
     }, refreshRate);
   }
 
-  registerPlayer = (name) => {
+  registerPlayer(name) {
     const baseurl =
+      // eslint-disable-next-line no-undef
       process.env.REACT_APP_API_URL + "/api/players/" + this.state.gameid;
 
-    // console.log(baseurl);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -87,16 +89,12 @@ class Players extends React.Component {
         )
       )
       .catch((error) => console.log(error));
-  };
+  }
 
   render() {
-    // const { match } = this.props;
-    // const { gameid } = match.params;
-
     return (
       <div className="container">
         <Jumbotron>
-          {/* <GameDetails id={gameid} name={this.state.name} /> */}
           <Welcome />
 
           {!this.state.isEnrolled && (

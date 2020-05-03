@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 export function Register(props) {
   const handleRegister = (evt) => {
@@ -19,5 +20,8 @@ export function Register(props) {
     </div>
   );
 }
+Register.propTypes = {
+  handleRegister: PropTypes.func.isRequired,
+};
 
 export default Register;

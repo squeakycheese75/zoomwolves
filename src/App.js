@@ -21,8 +21,15 @@ function App() {
         <Route
           exact
           path="/players/:gameid"
-          component={(props) => <Players gameid={props.match.params.gameid} />}
+          component={(props) => (
+            // eslint-disable-next-line react/prop-types
+            <Players gameid={props.match.params.gameid} {...props} />
+          )}
         />
+        {/* <Route
+          path="/players/:gameid"
+          render={({ match }) => <Players match={match} />}
+        /> */}
       </Switch>
     </div>
   );

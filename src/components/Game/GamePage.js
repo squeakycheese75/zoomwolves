@@ -30,6 +30,7 @@ class RegisterGame extends React.Component {
   }
 
   async handleRegister() {
+    // eslint-disable-next-line no-undef
     const baseurl = process.env.REACT_APP_API_URL + "/api/games";
     console.log(baseurl);
     const requestOptions = {
@@ -57,6 +58,7 @@ class RegisterGame extends React.Component {
 
   async handleCast() {
     const baseurl =
+      // eslint-disable-next-line no-undef
       process.env.REACT_APP_API_URL + "/api/games/" + this.state.id + "/close";
     console.log(baseurl);
     const requestOptions = {
@@ -76,6 +78,7 @@ class RegisterGame extends React.Component {
 
   async loadCharacters() {
     const baseurl =
+      // eslint-disable-next-line no-undef
       process.env.REACT_APP_API_URL + "/api/games/" + this.state.id;
     const requestOptions = {
       method: "GET",

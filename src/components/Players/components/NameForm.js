@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 export function NameForm(props) {
   const [name, setName] = useState("");
@@ -33,4 +34,7 @@ export function NameForm(props) {
   );
 }
 
+NameForm.propTypes = {
+  registerPlayer: PropTypes.func.isRequired,
+};
 export default NameForm;

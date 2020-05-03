@@ -8,6 +8,7 @@ class Casting extends React.Component {
   }
 
   async componentDidMount() {
+    // eslint-disable-next-line no-undef
     const baseurl = process.env.REACT_APP_API_URL + "/api/characters/abcd";
     const response = await fetch(baseurl);
     const json = await response.json();
@@ -19,7 +20,7 @@ class Casting extends React.Component {
       <div>
         <ul>
           <h3>
-            You've been cast as a <b>{this.state.data.role}</b>!
+            You&apos;ve been cast as a <b>{this.state.data.role}</b>!
           </h3>
           <p>{this.state.data.desc}</p>
         </ul>

@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export function Cast(props) {
   const { character } = props;
   return (
     <div>
       <h5 className="display-3">
-        You've been cast as a <b>{character.role}</b>
+        You&apos;ve been cast as a <b>{character.role}</b>
       </h5>
       <h4>Your role:</h4>
       <ul>
@@ -16,5 +17,7 @@ export function Cast(props) {
     </div>
   );
 }
-
+Cast.propTypes = {
+  character: PropTypes.string.isRequired,
+};
 export default Cast;

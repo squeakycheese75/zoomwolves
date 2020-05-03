@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Registered = ({ id, players = {} }) => {
+  // eslint-disable-next-line no-undef
   const url = process.env.REACT_APP_URL + "/players/" + id;
 
   return (
@@ -14,7 +16,7 @@ const Registered = ({ id, players = {} }) => {
       </a>
       <br />
       <h2>Registered players: {players.length}</h2>
-      <ul class="list-unstyled">
+      <ul className="list-unstyled">
         {players.map((player) => (
           <li key={player.name}>
             {player.name} : {player.role}
@@ -23,5 +25,10 @@ const Registered = ({ id, players = {} }) => {
       </ul>
     </div>
   );
+};
+
+Registered.propTypes = {
+  id: PropTypes.string.isRequired,
+  players: PropTypes.array.isRequired,
 };
 export default Registered;

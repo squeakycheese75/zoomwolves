@@ -1,10 +1,10 @@
 import React from "react";
 
-export function Cast(props) {
+export function Cast() {
   return (
     <div>
       <hr className="my-2" />
-      <article class="markdown-body" align="left">
+      <article className="markdown-body" align="left">
         <header>
           <h1 className="docTitle_1vWb">How to play the game.</h1>
         </header>
@@ -33,7 +33,7 @@ export function Cast(props) {
           <h4>When the Werewolves hunt!</h4>
           <p>
             Instruct everyone to look down during the night times events and
-            make sure they're on mute. Cheaters generally get eaten!
+            make sure they are on mute. Cheaters generally get eaten!
           </p>
           <h5>The Werewolves</h5>
           <ul>
@@ -49,7 +49,7 @@ export function Cast(props) {
               </p>
             </li>
             <li>
-              <p>Once they've picked a vilager send them back to sleep.</p>
+              <p>Once they have picked a vilager send them back to sleep.</p>
             </li>
           </ul>
           <h5>The Seer</h5>
@@ -94,14 +94,14 @@ export function Cast(props) {
                 them to identify who they wish to use the power on.
               </p>
               <p>
-                If it's poison then have them <b>pm</b> you the name of the
+                If it is poison then have them <b>pm</b> you the name of the
                 player to kill.
               </p>
               <p>
-                If it's revive they will revive the person killed in that turn
+                If it is revive they will revive the person killed in that turn
                 by the Werewolves.
               </p>
-              <p>Keep track of what powers they've used.</p>
+              <p>Keep track of what powers they have used.</p>
             </li>
             <li>
               <p>Send the Witch back to sleep!</p>

@@ -1,9 +1,9 @@
-import React from "react";
-import "./App.css";
-import { Route, Switch } from "react-router-dom";
-import RegisterGame from "./components/Game/GamePage";
-import Players from "./components/Players/PlayersPage";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
+import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import RegisterGame from './components/Game/GamePage';
+import Players from './components/Players/PlayersPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
